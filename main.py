@@ -1,105 +1,80 @@
-# -*- coding: utf-8 -*-
-
-################################################################################
-## Form generated from reading UI file 'backup0iTaXAn.ui'
-##
-## Created by: Qt User Interface Compiler version 6.8.1
-##
-## WARNING! All changes made in this file will be lost when recompiling UI file!
-################################################################################
+import generated.front_window as front_window
 import sys
-from PySide6.QtCore import QCoreApplication, QMetaObject, QSize, Qt
-from PySide6.QtWidgets import QApplication, QDateEdit, QDialog, QDialogButtonBox, QGridLayout, QLabel, QLineEdit, QWidget
-
-class Ui_Dialog(object):
-    def setupUi(self, Dialog):
-        if not Dialog.objectName():
-            Dialog.setObjectName(u"Timesheet")
-
-        #sets size of the GUI window
-        Dialog.resize(415, 155)
-        Dialog.setMinimumSize(QSize(415, 155))
-        Dialog.setMaximumSize(QSize(415, 155))
-
-        #Istantiates self.gridLayout
-        self.gridLayout = QGridLayout(Dialog)
-
-        #Formats Employee name input box
-        self.emp_name_2 = QLineEdit(Dialog)
-        self.gridLayout.addWidget(self.emp_name_2, 0, 2, 1, 1)
-
-        #Formats Employee name text box
-        self.emp_name = QLabel(Dialog)
-        self.gridLayout.addWidget(self.emp_name, 0, 0, 1, 1)
-
-        #Formats Employee pay period text box
-        self.pay_period_start = QLabel(Dialog)
-        self.gridLayout.addWidget(self.pay_period_start, 2, 0, 1, 1)
-
-        #Formats Employee pay period date input box
-        self.dateEdit = QDateEdit(Dialog)
-        self.gridLayout.addWidget(self.dateEdit, 2, 2, 1, 1)
-
-        #Formats Employee File Path Text
-        self.file_path = QLabel(Dialog)
-        self.gridLayout.addWidget(self.file_path, 3, 0, 1, 1)
-
-        #Formats employee file path input box
-        self.file_path_2 = QLineEdit(Dialog)
-        self.gridLayout.addWidget(self.file_path_2, 3, 2, 1, 1)
-
-        #Formats Supervisor name text box
-        self.sup_name = QLabel(Dialog)
-        self.gridLayout.addWidget(self.sup_name, 1, 0, 1, 1)
-
-        #Formats Supervisor name input box
-        self.sup_name_2 = QLineEdit(Dialog)
-        self.gridLayout.addWidget(self.sup_name_2, 1, 2, 1, 1)
-
-        #creates and formats 'finish' buttons
-        self.finish_button = QDialogButtonBox(Dialog)
-        self.finish_button.setOrientation(Qt.Orientation.Horizontal)
-        self.finish_button.setStandardButtons(QDialogButtonBox.StandardButton.Cancel|QDialogButtonBox.StandardButton.Ok)
-        self.gridLayout.addWidget(self.finish_button, 4, 2, 2, 2)
-
-        #function call, grabs 
-        self.retranslateUi(Dialog)
-        self.finish_button.accepted.connect(self.on_finish_button_clicked)
-        self.finish_button.rejected.connect(Dialog.reject)
+from PySide6.QtWidgets import QDialog, QApplication
+from PySide6.QtCore import QDate
+from datetime import datetime
+from openpyxl import load_workbook
 
 
-        QMetaObject.connectSlotsByName(Dialog)
+# Class to incorperate functions for  
+class My_App:
+
+    def __init__(self):
+        self.generate_data()
+
+    # Loads in data for GUI, if pre existing data exists
+    def generate_data(self):
+        
+        wb = load_workbook('Excel Test File.xlsx',keep_vba=True, data_only=True)
+        sheet = wb.active   
+        cell_value = sheet['G17'].value
+        
+        that = cell_value
+        print("Cell val here:",that)
+        
+        wb.save('Excel Test File.xlsx')
+        date_str = "1/6/2025"
+        date = QDate.fromString(date_str, "M/d/yyyy") # Convert the string to a QDate object
+
+        self.current_date = datetime.now().strftime("%m/%d/%Y")
+
+        ui.lineEdit_emp_name_input.setText("Sharik Mahmood")
+        ui.lineEdit_sup_name_input.setText("Omar Gonzales")
+        ui.lineEdit_file_path_input.setText("Testing :)")
+        ui.dateEdit_date_input.setDate(date)
 
 
-
-    def retranslateUi(self, Dialog):
-
-        #Sets the names of the Textboxes in the GUI
-        Dialog.setWindowTitle(QCoreApplication.translate("Dialog", u"Timesheet", None))
-        self.emp_name.setText(QCoreApplication.translate("Dialog", u"Enter Employe Name", None))
-        self.sup_name.setText(QCoreApplication.translate("Dialog", u"Enter Supervisor Name", None))
-        self.pay_period_start.setText(QCoreApplication.translate("Dialog", u"Select Pay Period Start", None))
-        self.file_path.setText(QCoreApplication.translate("Dialog", u"File Path", None))
-
-        employee_name = self.emp_name_2.text()
+        # Pay period can be calculated using the calender
+        # File path will be given from the user, can re-use previous location
     
-    def on_finish_button_clicked(self):
-        employee_name = self.emp_name_2.text()
-        supervisor_name = self.sup_name_2.text()
-        file_path = self.file_path_2.text()
-        date = self.dateEdit.text()
 
-        print(f"Employee Name: {employee_name}")
-        print(f"supervisor_name: {supervisor_name}")
-        print(f"date: {date}")
-        print(f"file_path: {file_path}")
+    # writes desired data to excel file
+    def write_to_file(self):
+        wb = load_workbook('Excel Test File.xlsx')
+        sheet = wb.active     
 
+        self.current_pay_period = ui.dateEdit_date_input.text()
+        self.emp_name = ui.lineEdit_emp_name_input.text()
+        self.sup_name = ui.lineEdit_sup_name_input.text()   
+
+        sheet['G11'] = self.emp_name    # Employee name
+        sheet['G12'] = self.sup_name    # Supervisor name
+        sheet['G16'] = self.current_pay_period # Pay Period start date
+        sheet['I41'] = self.emp_name    # Employee signature
+        sheet['E41'] = self.current_date # Current date
+        
+        wb.save('Excel Test File.xlsx')
+
+    # Outputs user input, from the GUI window
+    def Output_Gui(self):
+        print("Employee name:", self.emp_name) 
+        print("Supervisor name:", self.sup_name) 
+        print("Pay Period Date:", ui.dateEdit_date_input.text()) 
+        print("File Path:", ui.lineEdit_file_path_input.text())
 
 
 if __name__ == "__main__":
+
     app = QApplication(sys.argv)  # Create the application instance
     Dialog = QDialog()  # Create the dialog instance
-    ui = Ui_Dialog()  # Instantiate the UI class
+    ui = front_window.Ui_DialogTimeSheet()  # Instantiate the UI class
+
     ui.setupUi(Dialog)  # Set up the UI for the dialog
+
+    my_app = My_App() # Creates instance of this class
+
     Dialog.show()  # Show the dialog
+    ui.pushButton_finish.clicked.connect(lambda: my_app.write_to_file()) #if clicked on 'OK' we write to file
+
     sys.exit(app.exec())  # Run the application
+
