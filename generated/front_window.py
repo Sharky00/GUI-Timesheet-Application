@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'TimeshseetUIYncRSn.ui'
+## Form generated from reading UI file 'TimeshseetUIFewzNU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.1
 ##
@@ -77,6 +77,7 @@ class Ui_DialogTimeSheet(object):
 
         self.label_path_title = QLabel(DialogTimeSheet)
         self.label_path_title.setObjectName(u"label_path_title")
+        self.label_path_title.setWordWrap(True)
 
         self.gridLayout.addWidget(self.label_path_title, 5, 0, 1, 1)
 
@@ -94,7 +95,7 @@ class Ui_DialogTimeSheet(object):
         self.label_file_path_title.setText(QCoreApplication.translate("DialogTimeSheet", u"File Path", None))
         self.label_emp_name_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Emter Employe Name", None))
         self.label_sup_name_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Enter Supervisor Name", None))
-        self.pushButton_path_picker.setText(QCoreApplication.translate("DialogTimeSheet", u"PushButton", None))
-        self.label_path_title.setText(QCoreApplication.translate("DialogTimeSheet", u"TextLabel", None))
+        self.pushButton_path_picker.setText(QCoreApplication.translate("DialogTimeSheet", u"Select Folder", None))
+        self.label_path_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Text", None))
     # retranslateUi
 

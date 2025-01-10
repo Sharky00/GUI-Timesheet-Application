@@ -20,10 +20,11 @@ class My_App:
     SUPERVI_NAME = "G12"
     PAY_STA_NAME = "G16"
     PAY_END_NAME = "G17"
+    E_SIGNATURE  = "I41"
+    CURRENT_DATE = "E41"
+    FILE_PATH   = "A101"
     PATH = " "
-
-
-
+    
     def __init__(self):
 
 
@@ -69,8 +70,11 @@ class My_App:
         ui.dateEdit_date_input.setDate(date)
         ui.lineEdit_emp_name_input.setText(data["Employee Name"])
         ui.lineEdit_sup_name_input.setText(data["Supervisor Name"])
-        # TODO: We need the previous file path to autofill and be auto selected
-        # If there was not a previous we do the current working directory
+        if data["File Path"] == " ":
+            data["File Path"] = os.path.join(os.path.expanduser("~"), "Documents")
+        self.PATH = data["File Path"]
+        ui.label_path_title.setText(data["File Path"])
+
 
         # Saving and closing workbook :)
         try:
@@ -115,9 +119,9 @@ class My_App:
         sheet[self.EMPLOYE_NAME] = ui.lineEdit_emp_name_input.text()    # Employee name
         sheet[self.SUPERVI_NAME] = ui.lineEdit_sup_name_input.text()   # Supervisor name
         sheet[self.PAY_STA_NAME] =  ui.dateEdit_date_input.text() # Pay Period start date
-        sheet['I41'] = ui.lineEdit_emp_name_input.text()    # Employee signature
-        sheet['E41'] = self.current_date # Current date
-        sheet['A101'] = self.PATH # FilePath that we used
+        sheet[self.E_SIGNATURE] = ui.lineEdit_emp_name_input.text()    # Employee signature
+        sheet[self.CURRENT_DATE] = self.current_date # Current date
+        sheet[self.FILE_PATH] = self.PATH # FilePath that we used
         
 
         # saves and closes the workbook :)
@@ -135,16 +139,29 @@ class My_App:
         copy = self.PATH + "moving" + ".xlsx"
         new_path = self.PATH + "\\" + ui.lineEdit_emp_name_input.text() + " Timesheet  " +datetime.now().strftime("%Y-%m-%d %H.%M.%S")  + ".xlsx"
         os.rename(cur_path, copy)
-        shutil.move(copy, new_path)
+        try:
+            shutil.move(copy, new_path)
+        except:
+            print("File path error, check if the path you gave exists")
+
         
 
 
     # Opens file explorer and saves the file path we choose
     def set_output_path(self):
 
+        
         tkinter.Tk().withdraw() 
         folder_path = filedialog.askdirectory()
+
+        # sets folder path into GUI, if it is empty we default to the current working directory
+        if folder_path == " ":
+            folder_path = os.path.join(os.path.expanduser("~"), "Documents")
+
+
         self.PATH = folder_path
+        ui.label_path_title.setText(self.PATH)
+        
 
 
 
