@@ -1,10 +1,8 @@
-# GUI-Application
- GUI Pyside6 Application for Intern Task 1:
+# GUI-Timesheet-Application
+Author: Sharik Mahmood
 
-Done - 
- -  Created the GUI from QT Designer
- -  refined the code to be more concise
- -  Able to read data for all inputs from GUI onto console
-
-N
-
+Run Tests 
+    - Enter your information into given fields
+    - Click Enter
+    - The program will save you last inputed information
+    - Will create a copy to the place you chose on your disc
