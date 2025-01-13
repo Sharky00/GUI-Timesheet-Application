@@ -10,11 +10,6 @@ from PySide6.QtCore import QDate
 from datetime import datetime
 from openpyxl import load_workbook
 
-# TODO: 
-#    - Make this code pep8
-#    - good commenting
-#    - README
-#    - Fix Templatea
 
 # Class to incorperate functions for  
 class My_App:
@@ -178,5 +173,6 @@ if __name__ == "__main__":
     ui.pushButton_finish.clicked.connect(lambda: my_app.write_to_file())
     ui.pushButton_path_picker.clicked.connect(lambda: my_app.set_output_path())
 
-    sys.exit(app.exec())  # Run the application
+    # Run the application
+    sys.exit(app.exec())  
 
