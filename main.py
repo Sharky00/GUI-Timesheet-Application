@@ -14,7 +14,6 @@ from openpyxl import load_workbook
 # Class to incorperate functions for  
 class My_App:
 
-
     # Global vars for needed cells
     EMPLOYE_NAME = "G11"
     SUPERVI_NAME = "G12"
@@ -25,9 +24,9 @@ class My_App:
     FILE_PATH   = "A101"
     PATH = " "
 
+    # Constructer calls function that sets up all information needed to properly display our GUI
     def __init__(self):
         self.generate_data()
-
 
 
     # Loads in data for GUI, if pre existing data exists
@@ -76,7 +75,6 @@ class My_App:
             print("This workbook is open, please close it")
             exit()
     
-
 
     # writes desired data to excel file
     def write_to_file(self):
@@ -138,8 +136,6 @@ class My_App:
             print("File path error, check if the path you gave exists")
 
         
-
-
     # Opens file explorer and saves the file path we choose
     def set_output_path(self):
 
@@ -156,23 +152,23 @@ class My_App:
         ui.label_path_title.setText(self.PATH)
         
 
-
-
         
 if __name__ == "__main__":
 
-    app = QApplication(sys.argv)  # Create the application instance
-    Dialog = QDialog()  # Create the dialog instance
-    ui = front_window.Ui_DialogTimeSheet()  # Instantiate the UI class
-    ui.setupUi(Dialog)  # Set up the UI for the dialog
+     # Create the application instance, Dialog instance, ui istanitaion
+    app = QApplication(sys.argv) 
+    Dialog = QDialog()  
+    ui = front_window.Ui_DialogTimeSheet() 
 
-    my_app = My_App() # Creates instance of this class
-    Dialog.show()  # Show the dialog
+    # Set up the UI for the dialog, than creates a instance of my_app that uses ui and displays dialog
+    ui.setupUi(Dialog) 
+    my_app = My_App()
+    Dialog.show()  
 
     # actions if we click a button
     ui.pushButton_finish.clicked.connect(lambda: my_app.write_to_file())
     ui.pushButton_path_picker.clicked.connect(lambda: my_app.set_output_path())
 
-    # Run the application
+    # Run the application event loop
     sys.exit(app.exec())  
 
