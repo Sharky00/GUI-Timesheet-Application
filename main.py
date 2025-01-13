@@ -10,6 +10,11 @@ from PySide6.QtCore import QDate
 from datetime import datetime
 from openpyxl import load_workbook
 
+# TODO: 
+#    - Make this code pep8
+#    - good commenting
+#    - README
+#    - Fix Templatea
 
 # Class to incorperate functions for  
 class My_App:
@@ -24,15 +29,8 @@ class My_App:
     CURRENT_DATE = "E41"
     FILE_PATH   = "A101"
     PATH = " "
-    
+
     def __init__(self):
-
-
-        # Get default values
-        # Def read_default_json()
-        # This function checks to see if defualt.json exist. 
-        # if it exist load json file into a dictionary
-        # load defaults dict.get("Key", defualt="")
         self.generate_data()
 
 
@@ -137,7 +135,7 @@ class My_App:
         shutil.copy(myFile, self.PATH)
         cur_path = self.PATH + "\\" + myFile
         copy = self.PATH + "moving" + ".xlsx"
-        new_path = self.PATH + "\\" + ui.lineEdit_emp_name_input.text() + " Timesheet  " +datetime.now().strftime("%Y-%m-%d %H.%M.%S")  + ".xlsx"
+        new_path = self.PATH + "\\" + ui.lineEdit_emp_name_input.text() + " Timesheet  " + datetime.now().strftime("%Y-%m-%d %H.%M.%S")  + ".xlsx"
         os.rename(cur_path, copy)
         try:
             shutil.move(copy, new_path)
