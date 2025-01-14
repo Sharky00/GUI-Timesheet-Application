@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'TimeshseetUIFewzNU.ui'
+## Form generated from reading UI file 'TimeshseetUIjseAkn.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.8.1
 ##
@@ -23,9 +23,9 @@ class Ui_DialogTimeSheet(object):
     def setupUi(self, DialogTimeSheet):
         if not DialogTimeSheet.objectName():
             DialogTimeSheet.setObjectName(u"DialogTimeSheet")
-        DialogTimeSheet.resize(415, 155)
+        DialogTimeSheet.resize(415, 192)
         DialogTimeSheet.setMinimumSize(QSize(415, 155))
-        DialogTimeSheet.setMaximumSize(QSize(415, 155))
+        DialogTimeSheet.setMaximumSize(QSize(415, 200))
         self.gridLayout = QGridLayout(DialogTimeSheet)
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_pay_period_start_title = QLabel(DialogTimeSheet)
@@ -93,7 +93,7 @@ class Ui_DialogTimeSheet(object):
         DialogTimeSheet.setWindowTitle(QCoreApplication.translate("DialogTimeSheet", u"Dialog", None))
         self.label_pay_period_start_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Select Pay Period Start", None))
         self.label_file_path_title.setText(QCoreApplication.translate("DialogTimeSheet", u"File Path", None))
-        self.label_emp_name_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Emter Employe Name", None))
+        self.label_emp_name_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Enter Employe Name", None))
         self.label_sup_name_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Enter Supervisor Name", None))
         self.pushButton_path_picker.setText(QCoreApplication.translate("DialogTimeSheet", u"Select Folder", None))
         self.label_path_title.setText(QCoreApplication.translate("DialogTimeSheet", u"Text", None))
